@@ -6,10 +6,9 @@ from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
 from bokeh.transform import factor_cmap
 
-df = pd.read_csv('mt_metrics.csv')
-
-df["accuracy_list"] = df["accuracy_list"].apply(pd.to_numeric, downcast="float")
-df["loss_list"] = df["loss_list"].apply(pd.to_numeric, downcast="float")
+df = pd.read_csv('mt_metrics_float.csv')
+df['accuracy_list'] = df['accuracy_list'].apply(lambda x: list(map(float, x.split(','))))
+df['loss_list'] = df['loss_list'].apply(lambda x: list(map(float, x.split(','))))
 
 TOOLTIPS=[
     ("Model Name", "@model_name"),
